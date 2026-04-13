@@ -1,6 +1,4 @@
-"""
-Django settings for quizly project.
-"""
+"""Django settings for quizly project."""
 
 from pathlib import Path
 from datetime import timedelta
@@ -8,7 +6,10 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-l$(x6en2ej*()uk4crjbpezg#i_bg=bl=f74c8dnp)g#d731+=')
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY',
+    'django-insecure-l$(x6en2ej*()uk4crjbpezg#i_bg=bl=f74c8dnp)g#d731+=',
+)
 
 DEBUG = True
 
@@ -76,11 +77,13 @@ DATABASES = {
 
 # Password validation
 
+_AUTH_PREFIX = 'django.contrib.auth.password_validation'
+
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+    {'NAME': f'{_AUTH_PREFIX}.UserAttributeSimilarityValidator'},
+    {'NAME': f'{_AUTH_PREFIX}.MinimumLengthValidator'},
+    {'NAME': f'{_AUTH_PREFIX}.CommonPasswordValidator'},
+    {'NAME': f'{_AUTH_PREFIX}.NumericPasswordValidator'},
 ]
 
 
