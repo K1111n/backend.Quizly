@@ -1,3 +1,4 @@
-from django.db import models
+"""Models for the users app.
 
-# Create your models here.
+Uses Django's built-in User model — no custom models required.
+"""

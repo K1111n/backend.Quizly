@@ -1,3 +1,4 @@
-from django.contrib import admin
+"""Admin configuration for the users app.
 
-# Register your models here.
+Uses Django's built-in User admin — no custom registration required.
+"""
