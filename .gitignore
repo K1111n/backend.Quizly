@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Django
+*.sqlite3
+*.log
+media/
+staticfiles/
+
+# Environment variables
+.env
+
+# Whisper / audio temp files
+*.mp3
+*.wav
+*.m4a
+*.webm
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
