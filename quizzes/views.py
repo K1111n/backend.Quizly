@@ -7,7 +7,7 @@ from rest_framework.exceptions import APIException, ValidationError
 
 from .models import Quiz
 from .serializers import QuizSerializer
-from .utils import process_youtube_url, get_user_quiz
+from .utils import process_youtube_url, get_user_quiz, is_youtube_url
 
 
 class QuizListCreateView(APIView):
@@ -26,6 +26,8 @@ class QuizListCreateView(APIView):
         url = request.data.get('url')
         if not url:
             raise ValidationError({'url': 'This field is required.'})
+        if not is_youtube_url(url):
+            raise ValidationError({'url': 'Only YouTube video URLs are supported.'})
         try:
             quiz = process_youtube_url(request.user, url)
         except Exception as e:

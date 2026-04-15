@@ -1,6 +1,7 @@
 """Helper functions: audio download, Whisper transcription, quiz generation."""
 
 import os
+import re
 import json
 import tempfile
 import shutil
@@ -12,6 +13,16 @@ from google import genai
 from rest_framework.exceptions import NotFound, PermissionDenied
 
 from .models import Quiz, Question
+
+
+_YOUTUBE_PATTERN = re.compile(
+    r'^(https?://)?(www\.)?(youtube\.com/(watch\?v=|shorts/)|youtu\.be/)\S+'
+)
+
+
+def is_youtube_url(url):
+    """Returns True if the given URL points to a YouTube video."""
+    return bool(_YOUTUBE_PATTERN.match(url))
 
 
 QUIZ_PROMPT_TEMPLATE = (
