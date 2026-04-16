@@ -3,7 +3,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.exceptions import APIException, ValidationError
+from rest_framework.exceptions import APIException, ValidationError, Throttled
+
+from google.genai.errors import ClientError
 
 from .models import Quiz
 from .serializers import QuizSerializer
@@ -30,6 +32,10 @@ class QuizListCreateView(APIView):
             raise ValidationError({'url': 'Only YouTube video URLs are supported.'})
         try:
             quiz = process_youtube_url(request.user, url)
+        except ClientError as e:
+            if e.code == 429:
+                raise Throttled(detail='Gemini API quota exceeded. Please try again later.')
+            raise APIException(detail=str(e))
         except Exception as e:
             raise APIException(detail=str(e))
         return Response(
